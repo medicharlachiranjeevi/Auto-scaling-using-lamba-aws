@@ -51,7 +51,7 @@ class Scaleup:
         ]
         reservations = ec2.describe_instances(Filters=filters)
         # print(reservations['Reservations'][0]['Instances'])
-        if len(reservations["Reservations"]) >= 2:
+        if len(reservations["Reservations"]) >= 4:
             return False
         else:
             return True
