@@ -7,4 +7,4 @@
 
 ###### tag is name which you represent your instance, loadbalancer to which your instance attach, VolumeSize is disk space 40 or 30, instance_size t2.mcrio or etc and ami image with instance should up.
 
-###### example ex[tag]='test',ex['loadbalancer']='test',VolumeSize=30,instance_size='t2.micro',ami='id'
+###### example ex[tag]='test',ex['loadbalancer']='test',ex['VolumeSize']=30,ex['instance_size']='t2.micro',ex['ami']='id'
