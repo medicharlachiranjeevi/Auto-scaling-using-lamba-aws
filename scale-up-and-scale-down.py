@@ -105,23 +105,23 @@ class Scaledown:
 
 def lambda_handler(event, context):
 
-    if "testing_scale" in event["ami"]["Records"][0]["Sns"]["Subject"]:
-        conf = download_old_ami("test_scale")
+    if "alarm_for_scale_up" in event["ami"]["Records"][0]["Sns"]["Subject"]:
+        conf = download_old_ami("path_to_pickle_file")
         create = Scaleup(conf)
 
         if create.dev_running():
             if create.get_by_name():
                 create.create_ec2()
 
-    elif "testing_down" in event["ami"]["Records"][0]["Sns"]["Subject"]:
-        conf = download_old_ami("testing_scale")
+    elif "alarm_for_scale_down" in event["ami"]["Records"][0]["Sns"]["Subject"]:
+        conf = download_old_ami("path_to_pickle_file")
         destroy = Scaledown(conf)
         destroy.get_by_name()
 
 
 def download_old_ami(key):
     sclient = boto3.client("s3")
-    response = sclient.get_object(Bucket="testing", Key=key)
+    response = sclient.get_object(Bucket="bucket_name", Key=key)
     body_string = response["Body"].read()
     positive_model_data = pickle.loads(body_string)
     print(positive_model_data)
